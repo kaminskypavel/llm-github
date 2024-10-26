@@ -20,7 +20,6 @@ export default function RootLayout({
       <body>
         <TRPCReactProvider>
           <NuqsAdapter>{children}</NuqsAdapter>
-
         </TRPCReactProvider>
       </body>
     </html>
