@@ -6,11 +6,15 @@ import {type SearchFormData, SearchSchema} from '../schema/search';
 
 interface SearchFormProps {
     onSearch: (query: string) => void;
+    initialValue?: string;
 }
 
-export default function SearchForm({onSearch}: SearchFormProps) {
+export default function SearchForm({onSearch, initialValue = ""}: SearchFormProps) {
     const {register, handleSubmit, formState: {errors}} = useForm<SearchFormData>({
-        resolver: zodResolver(SearchSchema)
+        resolver: zodResolver(SearchSchema),
+        defaultValues: {
+            query: initialValue ?? ""
+        }
     });
 
     const onSubmit = (data: SearchFormData) => {
