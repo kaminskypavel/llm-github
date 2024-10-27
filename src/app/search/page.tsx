@@ -1,30 +1,21 @@
 "use client";
-import React from 'react';
-import {useSearchParams} from 'next/navigation';
+import React, {Suspense} from 'react';
 import SearchForm from '@/components/SearchForm';
-import {useRouter} from 'next/navigation';
+import {useQueryState, parseAsString} from 'nuqs';
 
-export default function SearchResults() {
-    const searchParams = useSearchParams();
-    const router = useRouter();
-    const query = searchParams.get('q') ?? '';
-
-    const handleSearch = (newQuery: string) => {
-        if (newQuery) {
-            router.push(`/search?q=${encodeURIComponent(newQuery)}`);
-        }
-    };
+function SearchResults() {
+    const [query, setQuery] = useQueryState('q', parseAsString);
 
     return (
         <div className="min-h-screen bg-gray-50">
             <div className="bg-white shadow-md">
                 <div className="w-full max-w-6xl mx-auto px-4 py-4">
-                    <SearchForm onSearch={handleSearch} />
+                    <SearchForm onSearch={setQuery} />
                 </div>
             </div>
 
             <div className="max-w-4xl mx-auto px-4 py-8">
-                <h2 className="text-2xl font-bold mb-4">Search Results for: {query}</h2>
+                <h2 className="text-2xl font-bold mb-4">Search Results for: {query ?? ''}</h2>
                 <div className="space-y-6">
                     {/* Sample search results */}
                     {[1, 2, 3].map((i) => (
@@ -44,5 +35,13 @@ export default function SearchResults() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function SearchPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <SearchResults />
+        </Suspense>
     );
 }
