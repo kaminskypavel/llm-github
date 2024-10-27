@@ -2,13 +2,15 @@ import {expect, test, describe} from "bun:test";
 import {SearchSchema} from './search';
 
 describe('SearchSchema', () => {
-    test('validates correct GitHub URLs', () => {
+    test('validates correct GitHub URLs (HTTPS and SSH)', () => {
         const validUrls = [
-            'https://github.com/facebook/react',
-            'https://github.com/vercel/next.js',
+            'https://github.com/facebook/react/',
+            'https://github.com/vercel/next.js/',
             'https://github.com/microsoft/TypeScript',
             'https://github.com/user-name/repo-name',
-            'https://github.com/user_name/repo_name',
+            'git@github.com:user-name/repo-name.git',
+            'git@github.com:user_name/repo_name/',
+            'git@github.com:user_name/repo_name',
         ];
 
         validUrls.forEach(url => {
@@ -20,12 +22,13 @@ describe('SearchSchema', () => {
     test('rejects invalid GitHub URLs', () => {
         const invalidUrls = [
             'not a url',
-            'http://github.com/facebook/react',
             'https://gitlab.com/gitlab-org/gitlab',
             'https://github.com/facebook',
             'https://github.com/facebook/react/tree/main',
             'https://github.com/user name/repo-name',
             'https://github.com/user@name/repo-name',
+            'git@bitbucket.org:user/repo.git',
+            'ssh://git@github.com/user/repo.git',
         ];
 
         invalidUrls.forEach(url => {

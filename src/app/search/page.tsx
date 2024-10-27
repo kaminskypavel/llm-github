@@ -7,7 +7,7 @@ import {useRouter} from 'next/navigation';
 export default function SearchResults() {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const query = searchParams.get('q') || '';
+    const query = searchParams.get('q') ?? '';
 
     const handleSearch = (newQuery: string) => {
         if (newQuery) {
