@@ -1,6 +1,6 @@
 "use client";
 import React, {Suspense} from 'react';
-import SearchForm from '@/components/SearchForm';
+import SearchForm from '@/components/search-form';
 import {useQueryState, parseAsString} from 'nuqs';
 
 function SearchResults() {

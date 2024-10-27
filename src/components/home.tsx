@@ -1,7 +1,7 @@
 import React from 'react';
 import {Globe} from 'lucide-react';
-import HomeSearch from '@/components/HomeSearch';
-import {HydrateClient} from '../../trpc/server';
+import HomeSearch from '@/components/home-search';
+import {HydrateClient} from '../trpc/server';
 
 export default function Home() {
   return (
@@ -28,9 +28,9 @@ export default function Home() {
               <button className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors">
                 About
               </button>
+            </div>
           </div>
         </div>
-      </div>
       </main>
     </HydrateClient>
 
