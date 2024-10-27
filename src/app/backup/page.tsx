@@ -1,7 +1,7 @@
 import React from 'react';
 import {Globe} from 'lucide-react';
 import HomeSearch from '@/components/HomeSearch';
-import {HydrateClient} from '../trpc/server';
+import {HydrateClient} from '../../trpc/server';
 
 export default function Home() {
   return (
